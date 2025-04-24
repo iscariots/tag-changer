@@ -3,6 +3,8 @@ import time
 import random
 
 TOKEN = "token"
+DELAY = 2 # u can change this to wtv maybe dont go below 0.1 idk
+
 guild_ids = [
     "123456789",
 ]
@@ -33,6 +35,7 @@ while True:
     for id in guild_ids:
         response = requests.put('https://discord.com/api/v9/users/@me/clan', headers=headers, json={"identity_guild_id": id, "identity_enabled": True})
         if response.status_code == 429:
-            time.sleep(response.json()["retry_after"] or 30)    
+            print("ratelimited lol")
+            time.sleep(response.json()["retry_after"] or 30)
         else:
-            time.sleep(5)
+            time.sleep(DELAY)
